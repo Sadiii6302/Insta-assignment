@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Check Balance</title>
+    <style>
+        body {
+            background-color: rgb(161, 100, 218);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+        }
+
+        #upi-form {
+            display: none; 
+            margin-top: 30px;
+        }
+
+        input[type="number"] {
+            width: 150px;
+            padding: 10px;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+
+        button {
+            padding: 10px 10px;
+            font-size: 16px;
+        }
+
+        #msg {
+            margin-top: 20px;
+            color: rgb(234, 228, 228);
+            font-size: 50px;
+        }
+    </style>
+</head>
+<body>
+    <button id="btn">Check Balance</button>
+    
+    <div id="upi-form">
+        <label for="upi-pin">Enter your UPI PIN (4 digits):</label>
+        <input type="number" id="upi-pin" placeholder="Enter your UPI PIN" maxlength="4">
+        <button id="submit-btn">Submit</button>
+    </div>
+
+    <div id="msg"></div>
+
+    <script>
+        const checkBalanceBtn = document.getElementById('btn');
+        const upiForm = document.getElementById('upi-form');
+        const submitBtn = document.getElementById('submit-btn');
+        const upiPinInput = document.getElementById('upi-pin');
+        const msgDiv = document.getElementById('msg');
+
+        
+        checkBalanceBtn.addEventListener('click', () => {
+            upiForm.style.display = 'block'; 
+        });
+
+        
+        submitBtn.addEventListener('click', () => {
+            const upiPin = upiPinInput.value;
+
+            
+            if (upiPin.length === 4 && /^\d{4}$/.test(upiPin)) {
+                msgDiv.textContent = 'Your Account Balance is: ₹10,000'; 
+            } else {
+                msgDiv.textContent = 'Invalid UPI PIN. Please enter exactly 4 digits.';
+            }
+        });
+
+        
+        upiPinInput.addEventListener('input', () => {
+            upiPinInput.value = upiPinInput.value.replace(/\D/g, ''); 
+        });
+    </script>
+</body>
+</html>
